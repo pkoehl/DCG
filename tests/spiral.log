@@ -1,0 +1,49 @@
+ 
+Input file:
+===========
+Data file            : spiral.crd
+Data type            : Continuous data
+Number of data points: 312
+Number of features   : 2
+Initial distance     : Euclidean 
+ 
+Parameters:
+===========
+Maximum number of clusters    : 10
+Number of random walks / point: 10
+Number of steps / random walk : 1000
+Cutoff for selecting clusters : 0.2
+ 
+DCG procedure: 
+============== 
+Number of temperatures identified : 19
+Temperatures, and number of clusters associated with them: 
+            Idx    Temperature   Ncluster
+TEMP        17       84.4          1
+TEMP        16       68.7          3
+TEMP        15       51.6          3
+TEMP        14       34.4          3
+TEMP        13       23.6          3
+TEMP        12       12.9          3
+TEMP        11       11.3          3
+TEMP        10       9.67          4
+TEMP         9       7.25          6
+TEMP         8       4.83          6
+TEMP         7       4.23          6
+TEMP         6       3.63          6
+TEMP         5       3.06          7
+TEMP         4       2.49          8
+TEMP         3       2.18          9
+TEMP         2       1.87          9
+TEMP         1      0.935         10
+TEMP         0          0         10
+ 
+Final DCG matrix:
+=================
+ASCII file containing DCG matrix: spiral.res
+ 
+CPU info:
+=========
+Number of threads used: 8
+Total running time    : 32.4 seconds
+ 

@@ -1,0 +1,45 @@
+#
+EXT=.exe
+NAME=DCG
+DIR=.
+NAMEFUL=$(DIR)/$(NAME)$(EXT)
+
+FC = ifort
+FFLAGS = -c -u -O
+CC = icc
+CPP = icpc
+CFLAGS = -c -O
+CPPFLAGS = -c -O -std=c++11
+LDFLAGS = -O
+INCLUDEDIRS = 
+LIBRARIES = -lpthread -lifcore -lm
+LIBS = -L/opt/intel/lib/
+
+.c.o :
+	$(CC) $(CFLAGS) $(INCLUDEDIRS) $<
+
+.cpp.o :
+	$(CPP)  $(CPPFLAGS) $(INCLUDEDIRS) $<
+
+.f90 .f.o :
+	$(FC) $(FFLAGS) $<
+
+OBJECTS = \
+$(NAME).o \
+ProcessInput.o \
+FindTemp.o ProcessTemp.o \
+RandomWalk.o mt.o \
+SpectralClustering.o kmns.o \
+EnsembleEigen.o basic_arpack.o basic_lapack.o \
+ManipDCG.o 
+
+$(NAMEFUL) : $(OBJECTS)
+	$(CC) -o $(NAMEFUL) $(LDFLAGS) $(OBJECTS) $(INCLUDEDIRS) $(LIBS) $(LIBRARIES) 
+
+all: $(OBJECTS)
+	$(CC) -o $(NAMEFUL) $(LDFLAGS) $(OBJECTS) $(INCLUDEDIRS) $(LIBS) $(LIBRARIES) 
+
+clean:
+	touch junk.o; rm -f *.o $(NAMEFUL)
+
+$(OBJECTS) :

@@ -1,0 +1,114 @@
+		DCG++
+	Deriving a distance measure from data
+
+1. Background
+================
+
+This package contains one program, DCG++, designed to generate
+an ultrametric on a set of data points, based on a given
+experimental distance on those data points. It follows the concept
+of Data Cloud Geometry.
+
+2. The Program: Installation
+=============================
+
+I distribute the source code for the whole program, including all
+subroutines, under the LGPL licensing code. Please read the text of
+the license (License.LGPLV3 provided with the distribution). 
+Basically, you are allowed to use and modify this code freely. 
+You are also allowed to distribute it, provided that you provide 
+the source code for all functions involded in DCG.
+
+The Makefiles provided with the distribution are intentionally kept
+simple. 
+
+To install the program, after extracting the program for the tar,
+gzipped file:
+
+tar xvzf DCG.tgz
+
+switch to the main directory, and just type make:
+cd DCG++
+make
+
+Note that this will use the standard g++ and gfortran compilers
+that should be installed by default on your Linux / Unix / MacOS X
+install. If you have the Intel compilers icpc and ifort installed,
+you can use instead:
+
+make intel
+
+which will compile the program using those compilers.
+
+Note: you may get some warnings when the file basic_lapack.f
+      is compiled. You can safely ignore them.
+
+3. Running the Program
+======================
+
+The name of the executable is DCG.exe; it is located in the bin
+subdirectory. Here I define:
+- the inputs needed by the program
+- typical commands to run the program
+
+3.a. Input file
+================
+
+DCG can read in two types of data:
+
+i) Continuous objects / features data
+
+This is the most common input for DCG. It assumes that you
+have a set of N objects, with each object characterized by M features.
+The file should then include N lines, with each line containing M numbers
+separated by spaces, i.e. the values of the M features considered. 
+Note that the program will then use the Euclidean distance as 
+input distance between the objects.
+
+ii) Directly a distance matrix
+
+You can give a distance matrix directly as input to DCG. This matrix should
+be stored in an ASCII file, with N rows and each row with N values separated
+with a space, for N objects.
+
+The program distinguishes between the two options based on the extension
+of the file: a file with extension ".crd" is considered of type i), while
+a file with extension ".dist" is considered of type ii).
+
+3.b. Typical runs
+=================
+
+just type:
+
+../bin/DCG.exe
+
+to see the list of options. A typical run on the spiral data
+(available in the directory tests) would be:
+
+../bin/DCG.exe -i spiral.crd -o spiral -n 10 -p 10 -m 1000 -t 8
+
+with:
+	-p 10: 10 random walks will be generated starting from
+	       input objects
+	-n 10: maximum number of clusters expected
+	-m 1000: each random walk includes 1000 steps
+	-t 8:    the program will use 8 processors (if the option
+		-t is not given, the program will detect the number
+		of cores available and use that number)
+
+3.c Output files
+=================
+
+DCG.exe generates two files, based on the name given in the input
+line (for example "spiral" in the example given above):
+
+*.res : file containing the Ultrametric distance matrix between
+	the objects, in ASCII format.
+*log  : log file that contains the intermediate information about
+	the run
+
+4. Disclaimer
+==============
+
+The program is provided "as is". Contact koehl@cs.ucdavis.edu
+if you have any problems.
